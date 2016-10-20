@@ -69,7 +69,7 @@ public class FirstClass extends AppCompatActivity {
 
         public void reception(View v){
             resultat="";
-            com.example.afpa1442.mynotes.MainActivity.Asynchrone as=new com.example.afpa1442.mynotes.MainActivity.Asynchrone();
+            Asynchrone as=new Asynchrone();
             as.execute("ok");
         }
 
@@ -89,4 +89,3 @@ public class FirstClass extends AppCompatActivity {
             }
         }
     }
-}

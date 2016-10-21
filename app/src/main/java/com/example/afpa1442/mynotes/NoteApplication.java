@@ -64,10 +64,11 @@ public class NoteApplication extends Application {
         }
     }
 
-    public void getAllProjects(){
+    public ArrayList<Project> getAllProjects(){
         resultat="";
         Asynchrone as=new Asynchrone();
         as.execute("ok");
+        return projects;
     }
 
     private void parseJsonFile (String jString) throws Exception {

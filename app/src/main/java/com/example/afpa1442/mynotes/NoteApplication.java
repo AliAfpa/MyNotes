@@ -65,7 +65,7 @@ public class NoteApplication extends Application {
         }
     }
 
-    public void reception(View v){
+    public void getAllProjects(View v){
         resultat="";
         Asynchrone as=new Asynchrone();
         as.execute("ok");

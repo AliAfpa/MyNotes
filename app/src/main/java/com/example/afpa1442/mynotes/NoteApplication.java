@@ -2,7 +2,6 @@ package com.example.afpa1442.mynotes;
 
 import android.app.Application;
 import android.os.AsyncTask;
-import android.view.View;
 import android.widget.Toast;
 
 import com.example.afpa1442.mynotes.classes.Project;
@@ -65,7 +64,7 @@ public class NoteApplication extends Application {
         }
     }
 
-    public void getAllProjects(View v){
+    public void getAllProjects(){
         resultat="";
         Asynchrone as=new Asynchrone();
         as.execute("ok");

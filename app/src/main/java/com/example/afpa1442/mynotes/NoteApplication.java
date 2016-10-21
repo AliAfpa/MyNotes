@@ -2,6 +2,7 @@ package com.example.afpa1442.mynotes;
 
 import android.app.Application;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.afpa1442.mynotes.classes.Project;
@@ -26,7 +27,7 @@ public class NoteApplication extends Application {
 
     String resultat="";
 
-    ArrayList<Project> projects = new ArrayList<>();
+    ArrayList<Project> projects;
 
     public class Asynchrone extends AsyncTask<String,Integer,String> {
         @Override
@@ -34,7 +35,7 @@ public class NoteApplication extends Application {
             HttpURLConnection httpUrlConnection = null;
             try {
 
-                URL url = new URL("http://10.75.25.52/tp09webservices/getProject.php/");
+                URL url = new URL("http://10.75.25.52/tp09webservices/getProjects.php/");
                 httpUrlConnection = (HttpURLConnection)
                         url.openConnection();
                 InputStream inStream = new
@@ -68,20 +69,21 @@ public class NoteApplication extends Application {
         resultat="";
         Asynchrone as=new Asynchrone();
         as.execute("ok");
+        Log.d("projectsApp", projects.toString());
         return projects;
     }
 
     private void parseJsonFile (String jString) throws Exception {
         JSONObject jsonObj = new JSONObject(jString);
-
-        JSONArray project = jsonObj.getJSONArray("project");
+        projects = new ArrayList<>();
+        JSONArray project = jsonObj.getJSONArray("projects");
         Project newProject;
         for (int i = 0; i < project.length(); i++) {
             String attributeId = project.getJSONObject(i).getString("id");
             String attributeName = project.getJSONObject(i).getString("name");
             newProject = new Project(Integer.valueOf(attributeId), attributeName);
-            projects.add(newProject);
-
+            if(!projects.contains(newProject))
+                projects.add(newProject);
         }
     }
 }

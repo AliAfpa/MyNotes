@@ -10,21 +10,30 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.afpa1442.mynotes.classes.Project;
+
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
-    private String[] mMenuSections = {"Project 1", "Project 2", "Project 3"};
+    //private String[] mMenuSections = {"Project 1", "Project 2", "Project 3"};
+    private ArrayList<Project> projects = new ArrayList<>();
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
+    private NoteApplication application;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        application = (NoteApplication) getApplication();
+        projects = application.getAllProjects();
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
-        mDrawerList.setAdapter(new ArrayAdapter<>(this, R.layout.left_drawer, mMenuSections));
+        Log.d("Projects", projects.toString());
+        mDrawerList.setAdapter(new ArrayAdapter<>(this, R.layout.left_drawer, projects));
 
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.app_name, R.string.app_name) {
             public void onDrawerClosed(View view) {
@@ -33,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
             public void onDrawerOpened(View drawerView) { Log.d("HomeActivity", "onDrawerOpened");}
         };
-        //mDrawerLayout.setDrawerListener(mDrawerToggle);
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);

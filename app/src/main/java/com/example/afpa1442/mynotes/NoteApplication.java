@@ -27,7 +27,7 @@ public class NoteApplication extends Application {
 
     String resultat="";
 
-    ArrayList<Project> projects;
+    ArrayList<Project> projects = new ArrayList<>();
 
     public class Asynchrone extends AsyncTask<String,Integer,String> {
         @Override
@@ -35,7 +35,7 @@ public class NoteApplication extends Application {
             HttpURLConnection httpUrlConnection = null;
             try {
 
-                URL url = new URL("http://10.75.25.52/tp09webservices/getProjects.php/");
+                URL url = new URL("http://10.75.25.80/tp09webservices/getProjects.php/");
                 httpUrlConnection = (HttpURLConnection)
                         url.openConnection();
                 InputStream inStream = new
@@ -75,7 +75,6 @@ public class NoteApplication extends Application {
 
     private void parseJsonFile (String jString) throws Exception {
         JSONObject jsonObj = new JSONObject(jString);
-        projects = new ArrayList<>();
         JSONArray project = jsonObj.getJSONArray("projects");
         Project newProject;
         for (int i = 0; i < project.length(); i++) {

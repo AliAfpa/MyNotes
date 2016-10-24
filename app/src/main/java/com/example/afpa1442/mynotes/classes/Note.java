@@ -15,6 +15,15 @@ public class Note {
 
     public Note(){}
 
+    public Note(int id, String title, String text, boolean solved, int project_id, int dev_id) {
+        this.id = id;
+        this.title = title;
+        this.text = text;
+        this.solved = solved;
+        this.project_id = project_id;
+        this.dev_id = dev_id;
+    }
+
     public int getId() {
         return id;
     }

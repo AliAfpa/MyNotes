@@ -3,6 +3,7 @@ package com.example.afpa1442.mynotes;
 import android.app.Application;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.example.afpa1442.mynotes.classes.Note;
@@ -36,6 +37,7 @@ public class NoteApplication extends Application {
     private ArrayList<Note> notes = new ArrayList<>();
     private Project currentProject = null;
     private Note currentNote = null;
+    private ArrayAdapter<Note> noteAdapter = null;
 
 
     public class Asynchrone extends AsyncTask<String,Integer,String> {
@@ -53,7 +55,7 @@ public class NoteApplication extends Application {
             HttpURLConnection httpUrlConnection = null;
             try {
 
-                URL url = new URL("http://10.75.25.80/tp09webservices/"+query);
+                URL url = new URL("http://10.75.25.80/notes/"+query);
                 httpUrlConnection = (HttpURLConnection)
                         url.openConnection();
                 InputStream inStream = new
@@ -85,8 +87,8 @@ public class NoteApplication extends Application {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            if(!projects.isEmpty()) currentProject = projects.get(0);
             Toast.makeText(getBaseContext(), result, Toast.LENGTH_LONG).show();
+            if(!projects.isEmpty()) currentProject = projects.get(0);
         }
     }
 
@@ -129,11 +131,14 @@ public class NoteApplication extends Application {
         return projects;
     }
 
-    public ArrayList<Note> getNotes(int id){
+    public void buildNotesList(int project_id){
         resultat="";
-        Asynchrone as=new Asynchrone("getNotes.php/"+id, PARSE_PROJECTS);
+        Asynchrone as=new Asynchrone("getNotes.php/"+project_id, PARSE_NOTES);
         as.execute("ok");
-        return notes;
+    }
+
+    public ArrayList<Note> getNotes(){
+        return this.notes;
     }
 
     public Project getCurrentProject(){

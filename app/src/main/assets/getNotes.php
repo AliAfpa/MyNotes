@@ -14,7 +14,7 @@
 			settype($path_params[1], 'integer');
 			$query = "SELECT n.id, n.title, n.text, n.solved, n.project_id, n.dev_id
 						FROM notes AS n
-						WHERE n.id = $path_params[1]";
+						WHERE n.project_id = $path_params[1]";
 		}
 		
 		else {

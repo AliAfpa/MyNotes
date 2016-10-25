@@ -14,8 +14,6 @@ import com.example.afpa1442.mynotes.NoteApplication;
 import com.example.afpa1442.mynotes.R;
 import com.example.afpa1442.mynotes.classes.Note;
 
-import java.util.ArrayList;
-
 public class NotesFragment extends Fragment implements OnItemClickListener{
 
     private ListView notesList;

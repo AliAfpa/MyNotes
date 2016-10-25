@@ -13,15 +13,18 @@
 
         <fragment
             android:id="@+id/topFragment"
+            android:name="com.example.afpa1442.mynotes.fragments.NotesFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
 
         <fragment
             android:id="@+id/bottomFragment"
+            android:name="com.example.afpa1442.mynotes.fragments.TextFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
+
     </LinearLayout>
     <!-- Menu -->
     <ListView android:id="@+id/left_drawer"

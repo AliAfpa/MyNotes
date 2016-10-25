@@ -16,7 +16,6 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    //private String[] mMenuSections = {"Project 1", "Project 2", "Project 3"};
     private ArrayList<Project> projects = new ArrayList<>();
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
@@ -30,10 +29,12 @@ public class MainActivity extends AppCompatActivity {
 
         application = (NoteApplication) getApplication();
         projects = application.getAllProjects();
+
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
         Log.d("Projects", projects.toString());
-        mDrawerList.setAdapter(new ArrayAdapter<>(this, R.layout.left_drawer, projects));
+        ArrayAdapter<Project> drawerAdapter = new ArrayAdapter<>(this, R.layout.left_drawer, projects);
+        mDrawerList.setAdapter(drawerAdapter);
 
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.app_name, R.string.app_name) {
             public void onDrawerClosed(View view) {
@@ -46,6 +47,11 @@ public class MainActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+
+
+
+
+
     }
 
     @Override
@@ -54,6 +60,9 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         int id = item.getItemId();
+        application.setCurrentProject(id);
+        application.buildNotesList(application.getCurrentProject().getId());
         return super.onOptionsItemSelected(item);
     }
+
 }

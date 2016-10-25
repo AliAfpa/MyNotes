@@ -1,5 +1,5 @@
 <?php
-	$link = mysqli_connect('localhost', 'phpmyadmin', 'afpa1442', 'notesDB') or
+	$link = mysqli_connect('mysql-brahms.alwaysdata.net', 'brahms', '1Suayaur', 'brahms_android') or
 	die('Could not connect: ' . mysql_error());
 	header('Content-type: application/json');
 	// Check for the path elements
@@ -22,8 +22,7 @@
 						FROM projects AS p";
 		}
 		
-		$result = mysqli_query($link,$query) or die('Query failed: ' .
-		mysql_error());
+		$result = mysql_query($link,$query) or die('Query failed: '.mysql_error());
 		
 		//Création d’un array list identifié par la clé books
 		$response["projects"] = array();

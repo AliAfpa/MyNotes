@@ -57,11 +57,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (mDrawerToggle.onOptionsItemSelected(item)) {
+
+            int id = item.getItemId();
+            application.setCurrentProject(id);
+            application.buildNotesList(application.getCurrentProject().getId());
             return true;
         }
-        int id = item.getItemId();
-        application.setCurrentProject(id);
-        application.buildNotesList(application.getCurrentProject().getId());
         return super.onOptionsItemSelected(item);
     }
 
